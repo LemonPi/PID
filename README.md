@@ -4,6 +4,11 @@ General PID control for volatile input (interrupt driven).
 Based on Brett Beauregard's [PID_V1 library](https://github.com/br3ttb/Arduino-PID-Library/),
 but with a more efficient compute (mainly by getting rid of his liberal use of doubles).
 
+# Purpose
+When you have an input (PWM to an H-bridge) that affects an output (speed of wheel) that is subject to additional factors (different motor, different terrain, non-linearity of driving current to speed, different wheel size), some feedback from the actual output is required to modulate the input so the output meets target. One closed loop technique that's commonly used in industry because of its simplicity and effectiveness is a PID controller - modulation on instant proportional error, integral of error over time, and the rate change of error/derivative.
+
+An example of a output response curve with the target velocity as a white line, actual velocity of left wheel as purple and right wheel as red, and with each PID cycle (set at 50ms) being 2 pixels wide:
+![example](http://imgur.com/GK4ILUi.png)
 # Instructions
 For arduino users, place directory inside My Documents/Arduino/libraries
 ```C++
